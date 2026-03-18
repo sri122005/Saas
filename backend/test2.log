@@ -1,0 +1,142 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.saas:multi-tenant-saas >---------------------
+[INFO] Building multi-tenant-saas 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ multi-tenant-saas ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ multi-tenant-saas ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ multi-tenant-saas ---
+[INFO] skip non existing resourceDirectory /home/sri/Downloads/halleyx/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ multi-tenant-saas ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target/test-classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ multi-tenant-saas ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.saas.multitenant.BackendApplicationTests
+20:42:33.330 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.saas.multitenant.BackendApplicationTests]: BackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:42:33.508 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.saas.multitenant.MultiTenantSaasApplication for test class com.saas.multitenant.BackendApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.3)
+
+2026-03-16T20:42:34.180+05:30  INFO 14792 --- [backend] [           main] c.s.multitenant.BackendApplicationTests  : Starting BackendApplicationTests using Java 21.0.10 with PID 14792 (started by sri in /home/sri/Downloads/halleyx/backend)
+2026-03-16T20:42:34.182+05:30  INFO 14792 --- [backend] [           main] c.s.multitenant.BackendApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2026-03-16T20:42:34.888+05:30  INFO 14792 --- [backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-16T20:42:34.949+05:30  INFO 14792 --- [backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 3 JPA repository interfaces.
+2026-03-16T20:42:36.189+05:30  INFO 14792 --- [backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-16T20:42:36.270+05:30  INFO 14792 --- [backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.8.Final
+2026-03-16T20:42:36.313+05:30  INFO 14792 --- [backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-16T20:42:36.593+05:30  INFO 14792 --- [backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-16T20:42:36.621+05:30  INFO 14792 --- [backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-16T20:42:36.810+05:30  INFO 14792 --- [backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1acc873b
+2026-03-16T20:42:36.812+05:30  INFO 14792 --- [backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-16T20:42:36.854+05:30  WARN 14792 --- [backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-16T20:42:36.873+05:30  INFO 14792 --- [backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 18.1
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-16T20:42:37.696+05:30  INFO 14792 --- [backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    set client_min_messages = WARNING
+Hibernate: 
+    alter table if exists projects 
+       drop constraint if exists FK7qub36q2kp85c3y1o6cobdgu1
+Hibernate: 
+    alter table if exists users 
+       drop constraint if exists FK21hn1a5ja1tve7ae02fnn4cld
+Hibernate: 
+    drop table if exists projects cascade
+Hibernate: 
+    drop table if exists tenants cascade
+Hibernate: 
+    drop table if exists users cascade
+Hibernate: 
+    create table projects (
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        tenant_id bigint not null,
+        description TEXT,
+        name varchar(255) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table tenants (
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        name varchar(255) not null unique,
+        primary key (id)
+    )
+Hibernate: 
+    create table users (
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        tenant_id bigint not null,
+        email varchar(255) not null unique,
+        name varchar(255) not null,
+        password varchar(255) not null,
+        role varchar(255) not null check (role in ('ADMIN','USER')),
+        primary key (id)
+    )
+Hibernate: 
+    alter table if exists projects 
+       add constraint FK7qub36q2kp85c3y1o6cobdgu1 
+       foreign key (tenant_id) 
+       references tenants
+Hibernate: 
+    alter table if exists users 
+       add constraint FK21hn1a5ja1tve7ae02fnn4cld 
+       foreign key (tenant_id) 
+       references tenants
+2026-03-16T20:42:37.794+05:30  INFO 14792 --- [backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-16T20:42:38.146+05:30  INFO 14792 --- [backend] [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-03-16T20:42:38.146+05:30  WARN 14792 --- [backend] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-03-16T20:42:38.318+05:30  WARN 14792 --- [backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-16T20:42:39.177+05:30  INFO 14792 --- [backend] [           main] c.s.multitenant.BackendApplicationTests  : Started BackendApplicationTests in 5.458 seconds (process running for 6.841)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/home/sri/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.585 s -- in com.saas.multitenant.BackendApplicationTests
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  11.011 s
+[INFO] Finished at: 2026-03-16T20:42:39+05:30
+[INFO] ------------------------------------------------------------------------

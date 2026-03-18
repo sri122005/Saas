@@ -1,0 +1,49 @@
+.logs-modal {
+    max-width: 800px;
+    width: 95%;
+    border-radius: 12px;
+}
+
+.log-card {
+    transition: all 0.2s ease;
+}
+
+.bg-dark-light {
+    background-color: var(--bg-secondary);
+}
+
+.bg-danger-dark {
+    background-color: var(--bg-error);
+}
+
+.bg-black-50 {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.rules-eval code {
+    background: transparent;
+    padding: 2px 5px;
+    color: #a5acb3;
+}
+
+.ls-1 {
+    letter-spacing: 1px;
+}
+
+.shadow-xl {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+}

@@ -1,0 +1,73 @@
+.workflow-editor-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-md);
+    color: var(--text-primary);
+}
+
+.editor-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+.editor-header .header-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.form-control-notion {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+    width: 100%;
+    padding: 12px 0;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: -0.04em;
+    transition: var(--transition-normal);
+}
+
+.form-control-notion:focus {
+    outline: none;
+    border-color: var(--text-primary);
+}
+
+.section-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f8f9fa;
+}
+
+.btn-notion-link {
+    background: none;
+    border: none;
+    color: #adb5bd;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.btn-notion-link:hover {
+    color: #f8f9fa;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

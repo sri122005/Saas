@@ -1,0 +1,8 @@
+/* Dashboard page — lightweight overrides only.
+   Core styles live in index.css */
+
+.page-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

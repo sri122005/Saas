@@ -1,0 +1,62 @@
+/* RuleEditor */
+
+.re-root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.re-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.re-condition {
+  display: inline-block;
+  padding: 3px 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'JetBrains Mono', SFMono-Regular, Consolas, monospace;
+  font-size: 12px;
+  color: var(--primary);
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.re-add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.re-add-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.re-add-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.re-form-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .re-form-grid { grid-template-columns: 1fr; }
+}

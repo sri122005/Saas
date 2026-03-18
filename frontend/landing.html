@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halleyx | 10x Faster Workflow Automation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #111118;
+            --accent: #22d3ee;
+            --accent-glow: rgba(34, 211, 238, 0.3);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --max-width: 1200px;
+            --section-padding: 120px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .display-font {
+            font-family: 'Syne', sans-serif;
+            letter-spacing: -0.04em;
+        }
+
+        /* Utils */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            gap: 8px;
+            border: none;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #0ea5e9);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+            border-color: var(--text-secondary);
+        }
+
+        .glass-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 32px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+        }
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 991px) {
+            .nav-links { display: none; }
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding-top: 180px;
+            padding-bottom: var(--section-padding);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(34, 211, 238, 0.15) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-mockup {
+            margin-top: 80px;
+            position: relative;
+            animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards;
+            opacity: 0;
+        }
+
+        .mockup-img {
+            max-width: 1000px;
+            width: 100%;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+        }
+
+        .mockup-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            height: 110%;
+            background: var(--accent);
+            opacity: 0.1;
+            filter: blur(120px);
+            z-index: -1;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Logos */
+        .logos {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .logos-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0.5;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .logo-item {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--text-secondary);
+            filter: grayscale(1);
+        }
+
+        /* Features */
+        .features {
+            padding: var(--section-padding) 0;
+        }
+
+        .features h2 {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 991px) {
+            .bento-grid { grid-template-columns: 1fr; }
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* How it works */
+        .how-it-works {
+            padding: var(--section-padding) 0;
+            background: radial-gradient(circle at bottom, rgba(34, 211, 238, 0.05) 0%, transparent 50%);
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .timeline-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--bg);
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-weight: 800;
+            color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: var(--section-padding) 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            padding: 32px;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .author h4 { font-size: 16px; font-weight: 600; }
+        .author span { font-size: 13px; color: var(--text-secondary); }
+
+        /* Pricing */
+        .pricing {
+            padding: var(--section-padding) 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .price-card {
+            text-align: center;
+        }
+
+        .price-card.featured {
+            border-color: var(--accent);
+            transform: scale(1.05);
+            z-index: 5;
+        }
+
+        .price-amount {
+            font-size: 48px;
+            font-weight: 800;
+            margin: 24px 0;
+        }
+
+        .price-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 32px;
+        }
+
+        .price-features li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* FAQ */
+        .faq {
+            padding: var(--section-padding) 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq h2 { text-align: center; margin-bottom: 60px; }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 24px 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-top: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            margin-top: 16px;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: var(--section-padding) 0;
+        }
+
+        .cta-banner {
+            background: linear-gradient(135deg, #6366f1 0%, #22d3ee 100%);
+            border-radius: 40px;
+            padding: 100px;
+            text-align: center;
+            color: #000;
+        }
+
+        .cta-banner h2 { font-size: 60px; margin-bottom: 24px; color: #000; }
+        .cta-banner p { font-size: 20px; font-weight: 500; margin-bottom: 40px; opacity: 0.8; }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .footer-col h4 { margin-bottom: 24px; font-size: 16px; font-weight: 700; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: var(--transition); }
+        .footer-col ul li a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--border);
+            padding-top: 40px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .social { display: flex; gap: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon"><i data-lucide="zap" size="20"></i></div>
+                Halleyx
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <a href="#" class="btn btn-primary">Start Building</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <h1>Automate your complex workflows <span style="color: var(--accent)">in seconds</span></h1>
+            <p>The enterprise-grade engine for modern teams. Build, monitor, and scale your backend logic without the technical debt.</p>
+            <div class="hero-ctas">
+                <a href="#" class="btn btn-primary">Get Started Free</a>
+                <a href="#" class="btn btn-secondary">Watch Demo</a>
+            </div>
+            <div class="hero-mockup">
+                <div class="mockup-glow"></div>
+                <img src="/home/sri/.gemini/antigravity/brain/f183221a-cd59-498c-86f7-2e7a14b2206a/halleyx_dashboard_mockup_1773809437170.png" alt="Dashboard Preview" class="mockup-img">
+            </div>
+        </div>
+    </header>
+
+    <section class="logos">
+        <div class="container">
+            <div class="logos-grid">
+                <div class="logo-item">VELOCITY</div>
+                <div class="logo-item">STRIPE</div>
+                <div class="logo-item">VERCEL</div>
+                <div class="logo-item">LINEAR</div>
+                <div class="logo-item">RAYCAST</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Everything you need to ship faster</h2>
+            <div class="bento-grid">
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i data-lucide="layout"></i></div>
+                    <h3>Visual Builder</h3>
+                    <p>Design multi-step automations with our intuitive drag-and-drop node interface. No code required.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i data-lucide="activity"></i></div>
+                    <h3>Live Monitoring</h3>
+                    <p>Track every execution in real-time. Identify bottlenecks and fix errors before they impact users.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i data-lucide="shield"></i></div>
+                    <h3>Enterprise Security</h3>
+                    <p>Role-based access control, detailed audit logs, and SOC2 compliant infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 style="text-align: center;">How Halleyx works</h2>
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="step-number">1</div>
+                    <h4 style="margin-bottom: 12px;">Define Input</h4>
+                    <p class="text-secondary small">Set up your data schema and triggers.</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">2</div>
+                    <h4 style="margin-bottom: 12px;">Build Logic</h4>
+                    <p class="text-secondary small">Chain steps and define rule-based rules.</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">3</div>
+                    <h4 style="margin-bottom: 12px;">Deploy & Scale</h4>
+                    <p class="text-secondary small">Run natively on our high-speed engine.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 80px;">Built for the modern web</h2>
+            <div class="testimonials-grid">
+                <div class="glass-card testimonial-card">
+                    <p class="text-secondary mb-5">"Halleyx reduced our manual operational tasks by 90%. We can now focus on building features instead of fixing pipelines."</p>
+                    <div class="testimonial-header">
+                        <div class="avatar" style="background: #3b82f6"></div>
+                        <div class="author">
+                            <h4>Alex Rivera</h4>
+                            <span>CTO @ Flowscale</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card testimonial-card">
+                    <p class="text-secondary mb-5">"The most intuitive workflow engine I've ever used. The visual debugging alone is worth the switch."</p>
+                    <div class="testimonial-header">
+                        <div class="avatar" style="background: #a855f7"></div>
+                        <div class="author">
+                            <h4>Sarah Chen</h4>
+                            <span>Engineer @ Vercel</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card testimonial-card">
+                    <p class="text-secondary mb-5">"Enterprise-grade reliability with a developer experience that actually makes sense. Absolutely critical for our stack."</p>
+                    <div class="testimonial-header">
+                        <div class="avatar" style="background: #ec4899"></div>
+                        <div class="author">
+                            <h4>James Wilson</h4>
+                            <span>Founder @ Stealth SaaS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 80px;">Simple transparent pricing</h2>
+            <div class="pricing-grid">
+                <div class="glass-card price-card">
+                    <h3>Free</h3>
+                    <div class="price-amount">$0</div>
+                    <ul class="price-features">
+                        <li><i data-lucide="check" size="14"></i> Up to 3 active workflows</li>
+                        <li><i data-lucide="check" size="14"></i> 1,000 executions / mo</li>
+                        <li><i data-lucide="check" size="14"></i> Standard monitoring</li>
+                        <li><i data-lucide="check" size="14"></i> Community support</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%">Get Started</a>
+                </div>
+                <div class="glass-card price-card featured">
+                    <h3>Pro</h3>
+                    <div class="price-amount">$49<span style="font-size: 16px; color: var(--text-secondary)">/mo</span></div>
+                    <ul class="price-features">
+                        <li><i data-lucide="check" size="14"></i> Unlimited workflows</li>
+                        <li><i data-lucide="check" size="14"></i> 50,000 executions / mo</li>
+                        <li><i data-lucide="check" size="14"></i> Advanced debugging tools</li>
+                        <li><i data-lucide="check" size="14"></i> Priority email support</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%">Go Pro</a>
+                </div>
+                <div class="glass-card price-card">
+                    <h3>Enterprise</h3>
+                    <div class="price-amount">Custom</div>
+                    <ul class="price-features">
+                        <li><i data-lucide="check" size="14"></i> Unlimited executions</li>
+                        <li><i data-lucide="check" size="14"></i> Custom step integrations</li>
+                        <li><i data-lucide="check" size="14"></i> Dedidcated node engine</li>
+                        <li><i data-lucide="check" size="14"></i> SLA & Gold support</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <div class="faq-question">What is Halleyx exactly? <i data-lucide="plus"></i></div>
+            <div class="faq-answer">Halleyx is a headless workflow engine designed to run background logic, data pipelines, and automation flows at enterprise scale.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Do I need to host it myself? <i data-lucide="plus"></i></div>
+            <div class="faq-answer">No, Halleyx is a fully managed cloud engine, but we also offer private cloud deployment for Enterprise customers.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Is it SOC2 compliant? <i data-lucide="plus"></i></div>
+            <div class="faq-answer">Yes, we maintain rigorous security standards and SOC2 Type II compliance to protect your enterprise data.</div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-banner">
+                <h2>Ready to automate?</h2>
+                <p>Join 5,000+ developers building faster with Halleyx.</p>
+                <a href="#" class="btn" style="background: #000; color: #fff; padding: 16px 40px; font-size: 18px;">Build your first flow</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 24px;">Halleyx</div>
+                <p class="text-secondary small">The next-generation engine for workflow automation and scaling.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">Engine API</a></li>
+                    <li><a href="#">Enterprise</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Status</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 Halleyx Inc. All rights reserved.</div>
+            <div class="social">
+                <a href="#"><i data-lucide="twitter" size="18"></i></a>
+                <a href="#"><i data-lucide="github" size="18"></i></a>
+                <a href="#"><i data-lucide="linkedin" size="18"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ Filter
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                item.classList.toggle('active');
+                const icon = q.querySelector('i');
+                if(item.classList.contains('active')) {
+                    icon.setAttribute('data-lucide', 'minus');
+                } else {
+                    icon.setAttribute('data-lucide', 'plus');
+                }
+                lucide.createIcons();
+            });
+        });
+
+        // Sequential Count Up Impression
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        });
+
+        // Simple smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
